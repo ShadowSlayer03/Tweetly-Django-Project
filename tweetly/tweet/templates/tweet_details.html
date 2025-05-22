@@ -1,0 +1,42 @@
+{% extends "layout.html" %}
+
+{% block title %}
+  {% if form.instance.pk %}Update Tweet{% else %}New Tweet{% endif %}
+{% endblock title %}
+
+{% block content %}
+<main class="flex-1 px-10 py-16 mx-auto">
+  <div class="max-w-xl mx-auto bg-gray-100 p-8 rounded-xl shadow-md">
+    <h1 class="text-3xl font-bold text-gray-800 mb-6 text-center">
+      {% if form.instance.pk %}Edit Your Tweet{% else %}Compose a New Tweet{% endif %}
+    </h1>
+
+    <form method="POST" enctype="multipart/form-data" class="space-y-6">
+      {% csrf_token %}
+      
+      <!-- Tweet Text -->
+      <div>
+        <label for="id_text" class="block text-gray-700 font-medium mb-1">Tweet</label>
+        {{ form.text }}
+      </div>
+
+      <!-- Optional Photo -->
+      <div>
+        <label for="id_photo" class="block text-gray-700 font-medium mb-1">Attach Photo (optional)</label>
+        {{ form.photo }}
+        {% if form.instance.photo %}
+          <p class="mt-2 text-sm text-gray-500">Current photo:</p>
+          <img src="{{ form.instance.photo.url }}" alt="Current Photo" class="mt-1 rounded-md h-32 object-cover">
+        {% endif %}
+      </div>
+
+      <!-- Submit Button -->
+      <div class="text-center">
+        <button type="submit" class="px-6 py-2 bg-blue-500 text-white rounded-lg shadow hover:bg-blue-600 transition">
+          {% if form.instance.pk %}Update Tweet{% else %}Post Tweet{% endif %}
+        </button>
+      </div>
+    </form>
+  </div>
+</main>
+{% endblock content %}

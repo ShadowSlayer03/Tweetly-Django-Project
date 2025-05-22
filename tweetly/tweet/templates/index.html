@@ -1,0 +1,61 @@
+{% extends "layout.html" %}
+
+{% block title %}Tweets{% endblock title %}
+
+{% block content %}
+<main class="flex-1 container mx-auto px-10 py-8">
+  <div class="flex justify-between items-center mb-6">
+    <h1 class="text-3xl font-bold">Tweets</h1>
+    
+    <a href="{% url 'tweet_submit' %}" 
+       class="inline-flex items-center gap-2 px-5 py-2 bg-blue-600 text-white font-semibold rounded-xl shadow hover:bg-blue-700 transition-all duration-300 ease-in-out focus:outline-none focus:ring-2 focus:ring-blue-400">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-5 w-5" fill="none"
+           viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
+      </svg>
+      Add Tweet
+    </a>
+  </div>
+
+  {% if tweets %}
+    <div class="grid gap-6">
+      {% for tweet in tweets %}
+      <div class="border rounded-lg p-4 shadow-sm">
+        <div class="w-full flex items-center justify-between mb-3">
+          <div class="flex items-center gap-3">
+            <div class="w-10 h-10 rounded-full bg-blue-100 flex items-center justify-center">
+              <span class="font-medium text-blue-500">
+                {{ tweet.user.username|slice:":2"|upper }}
+              </span>
+            </div>
+            <div>
+              <h3 class="font-medium text-gray-900">{{ tweet.user.username }}</h3>
+              <p class="text-sm text-gray-500">@{{ tweet.user.username }}</p>
+            </div>
+          </div>
+          
+          {% if request.user == tweet.user %}
+          <div class="flex gap-2">
+            <a href="{% url 'tweet_edit' tweet.id %}" class="text-sm px-3 py-1 rounded-md bg-yellow-500 text-white hover:bg-yellow-600 transition">
+              Edit
+            </a>
+            <a href="{% url 'tweet_delete' tweet.id %}" class="text-sm px-3 py-1 rounded-md bg-red-500 text-white hover:bg-red-600 transition">
+              Delete
+            </a>
+          </div>
+          {% endif %}
+        </div>
+
+        <p class="text-gray-800 mb-2">{{ tweet.text }}</p>
+        {% if tweet.photo %}
+          <img src="{{ tweet.photo.url }}" alt="Tweet photo" class="mt-2 rounded-md max-h-80 object-cover" />
+        {% endif %}
+        <p class="text-sm text-gray-400 mt-2">Posted on {{ tweet.created_at|date:"M d, Y H:i" }}</p>
+      </div>
+      {% endfor %}
+    </div>
+  {% else %}
+    <p class="text-gray-500 text-center mt-10">No tweets yet. Be the first to post one!</p>
+  {% endif %}
+</main>
+{% endblock content %}
