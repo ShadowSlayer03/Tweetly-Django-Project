@@ -1,0 +1,79 @@
+{% extends "layout.html" %}
+
+{% block title %}Register{% endblock title %}
+
+{% block content %}
+<main class="flex-1 px-6 py-16 mx-auto">
+  <div class="max-w-md mx-auto bg-gray-100 p-8 rounded-xl shadow-md">
+    <h1 class="text-3xl font-bold text-gray-800 mb-6 text-center">Create an Account</h1>
+
+    <form method="POST" class="space-y-6">
+      {% csrf_token %}
+
+      {% if form.non_field_errors %}
+      <div class="text-red-500 text-sm text-center">
+        {% for error in form.non_field_errors %}
+          <p>{{ error }}</p>
+        {% endfor %}
+      </div>
+      {% endif %}
+
+      <!-- Username -->
+      <div>
+        <label for="id_username" class="block text-gray-700 font-medium mb-1">Username</label>
+        {{ form.username }}
+        {% if form.username.errors %}
+          <p class="text-red-500 text-sm mt-1">
+            {{ form.username.errors.0 }}
+          </p>
+        {% endif %}
+      </div>
+
+      <!-- Email -->
+      <div>
+        <label for="id_email" class="block text-gray-700 font-medium mb-1">Email</label>
+        {{ form.email }}
+        {% if form.email.errors %}
+          <p class="text-red-500 text-sm mt-1">
+            {{ form.email.errors.0 }}
+          </p>
+        {% endif %}
+      </div>
+
+      <!-- Password1 -->
+      <div>
+        <label for="id_password1" class="block text-gray-700 font-medium mb-1">Password</label>
+        {{ form.password1 }}
+        {% if form.password1.errors %}
+          <p class="text-red-500 text-sm mt-1">
+            {{ form.password1.errors.0 }}
+          </p>
+        {% endif %}
+      </div>
+
+      <!-- Password2 -->
+      <div>
+        <label for="id_password2" class="block text-gray-700 font-medium mb-1">Confirm Password</label>
+        {{ form.password2 }}
+        {% if form.password2.errors %}
+          <p class="text-red-500 text-sm mt-1">
+            {{ form.password2.errors.0 }}
+          </p>
+        {% endif %}
+      </div>
+
+      <!-- Submit -->
+      <div class="text-center">
+        <button type="submit" class="px-6 py-2 bg-blue-500 text-white rounded-lg shadow hover:bg-blue-600 transition">
+          Register
+        </button>
+      </div>
+    </form>
+
+    <p class="text-center text-sm text-gray-500 mt-4">
+      Already have an account? 
+      <a href="/login" class="text-blue-500 hover:underline">Login here</a>.
+    </p>
+  </div>
+</main>
+{% endblock content %}

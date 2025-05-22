@@ -1,0 +1,38 @@
+{% extends "layout.html" %} 
+
+{% block title %}Home{% endblock title %} 
+
+{% block content %}
+
+<main class="flex-1 px-10 py-16 mx-auto">
+    <div class="text-center max-w-3xl mx-auto">
+      <h1 class="text-5xl font-extrabold mb-6 text-gray-800">Welcome to <span class="text-blue-500">Tweetly</span></h1>
+      <p class="text-lg text-gray-600 mb-6">
+        Your modern microblogging platform to connect, express, and stay updated. 
+        Tweetly lets you share what's on your mind—instantly and beautifully.
+      </p>
+      <p class="text-md text-gray-500 mb-10">
+        Whether you're here to follow your favorite creators, catch trending topics, or share a quick thought with the world, Tweetly makes it seamless and fun.
+      </p>
+  
+      <div class="bg-gray-100 rounded-xl p-8 shadow-md text-center">
+        <h2 class="text-2xl font-semibold mb-4 text-gray-800">🚀 Why Tweetly?</h2>
+        <ul class="text-gray-600 space-y-2 text-left mx-auto inline-block text-sm sm:text-base list-disc list-inside">
+          <li>⚡ Post real-time tweets with ease</li>
+          <li>💬 Engage with others via replies & mentions</li>
+          <li>🌐 Explore a feed curated just for you</li>
+          <li>🎨 Beautiful, responsive UI powered by Tailwind CSS</li>
+          <li>🔐 Secure & privacy-focused platform</li>
+        </ul>
+      </div>
+  
+      <div class="mt-10">
+        <a href="/tweets/" class="inline-block px-6 py-3 bg-blue-500 text-white rounded-lg shadow hover:bg-blue-600 transition">
+          Start Tweeting Now →
+        </a>
+      </div>
+    </div>
+  </main>
+  
+
+{% endblock content %}
